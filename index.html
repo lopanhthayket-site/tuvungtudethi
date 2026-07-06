@@ -228,6 +228,41 @@ select {
     background-color: #fff0e1;
   }
 
+
+.word-text{
+    display:flex;
+    align-items:flex-start;
+    width:100%;
+}
+
+.en-word{
+    width:420px;      /* chỉnh tăng giảm */
+    flex-shrink:0;
+    font-weight:600;
+}
+
+.vn-word{
+    flex:1;
+}
+
+@media (max-width:768px){
+
+  .word-text{
+      display:inline;
+  }
+
+  .en-word{
+      width:auto;
+      min-width:auto;
+      display:inline;
+      font-weight:600;
+  }
+
+  .vn-word{
+      display:inline;
+  }
+
+}
   .confetti {
     position: fixed;
     top: 50%;
@@ -1928,7 +1963,23 @@ function renderWords(){
     let realIndex = data[currList].indexOf(item);
     box.innerHTML+=`
       <div class="word-row">
-        <span>${item.en}: ${item.vn}</span>
+<span class="word-text">
+
+  <span class="en-word">
+    ${item.en}:
+  </span>
+
+  <span class="vn-word">
+    ${item.vn}
+  </span>
+
+  <i class="fa-solid fa-volume-high speaker-icon"
+     onclick="event.stopPropagation();speakWord(\`${item.en}\`)">
+  </i>
+
+</span>
+
+
         <input type="checkbox" ${item.tick?"checked":""} onclick="toggleTick(${realIndex})">
       </div>`;
   });
